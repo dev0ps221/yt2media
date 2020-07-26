@@ -1,4 +1,4 @@
-# yt2mp3
+# yt2media
 A Simple Youtube Video/Music Downloader Written In JS
 
 formats:
