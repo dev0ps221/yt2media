@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "YT2mp3 v0.0.0@beta - Tek-Tech 2021"
 echo "App Starting.."
-npx electron src
+npx electron .
 echo "Bye"
 exit 0

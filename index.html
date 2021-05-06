@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>YT2MEDIA V0.0.1@beta - Tek-Tech 2021</title>
+    <link rel="stylesheet" href="index.css">
+  </head>
+  <body>
+    <h1>YT2MEDIA </h1>
+    <p>Welcome to your new favorite youtube downloader application.</p>
+    <section id='dl_section'>
+      <input type='text' placeholder="Video link"/><button id='go'>GO</button>
+    </section>
+    <section id='pvw_section'>
+      <h1 id='pvw_title'>
+      </h1>
+      <img id='pvw_img'/>
+      <a id='download_link' target="_blank" download>
+        <button id='download'>
+          download
+        </button>
+      </a>
+    </section>
+    <section id='please_wait' style="display:none">
+      <img title='please wait' alt='please wait' src='https://media.tenor.com/images/bf79e89070794c829afa2647ad4d597e/tenor.gif'/>
+      <!-- <img style="width:100%;" src='https://media.tenor.com/images/738d1e869950200578b0892f2fd57e0b/tenor.gif'/> -->
+
+
+    </section>
+    <script>
+
+      const {ipcRenderer} = require('electron'),
+      go = document.querySelector('#go')
+      go.addEventListener(
+        'click'
+        ,()=>{
+          let val = go.previousSibling.value.trim()
+          if (val){
+            ipcRenderer.send(
+              'getVid',
+              val
+            )
+
+            document.querySelector('#please_wait').style.display = 'block'
+            ipcRenderer.on(
+              'getVid'
+              ,(s,d)=>{
+                document.querySelector('#pvw_title').innerText = d.title
+                document.querySelector('#pvw_img').src = d.thumbnails[0].url
+                document.querySelector('#download').style.display = 'block'
+                document.querySelector('#please_wait').style.display = 'none'
+                document.querySelector('#download').parentNode.href= d.requested_formats[0].url
+                document.querySelector('#download').addEventListener(
+                  'click'
+                  ,e=>{
+                    if(!confirm('did the download correctly started ?'))
+                      alert('la page va redemarrer, reessayez, si le probleme persiste contactez le support technique par mail a l adresse tektechlofficial@gmail.com')
+                    document.location.reload()
+                    // browser.downloads.download(d.requested_formats[0].url)
+                  }
+                )
+              }
+            )
+          }
+        }
+      )
+    </script>
+  </body>
+</html>
