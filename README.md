@@ -7,3 +7,10 @@ MP4
 FLV
 AVI
 
+
+#usage
+npm init
+
+chmod +x run_app
+
+./run_app
