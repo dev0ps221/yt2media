@@ -43,7 +43,6 @@
   },
   "dependencies": {
     "@tek-tech/teesio": "^0.0.1-dIeet.1",
-    "electron-squirrel-startup": "^1.0.0",
     "express": "^4.17.3",
     "socket.io": "^4.4.1",
     "ytee": "^1.0.0"
@@ -53,7 +52,6 @@
     "@electron-forge/maker-deb": "^6.0.0-beta.54",
     "@electron-forge/maker-rpm": "^6.0.0-beta.54",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.54",
-    "@electron-forge/maker-zip": "^6.0.0-beta.54",
-    "electron": "12.1.0"
+    "@electron-forge/maker-zip": "^6.0.0-beta.54"
   }
 }
