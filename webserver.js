@@ -8,10 +8,20 @@ const searcher  = ytee.Searcher
 const path = require('path')
 const sockets = new TeeSio({server,sio:require('socket.io')})
 const views = path.join(__dirname,'webcli','views')
+const assets = path.join(__dirname,'webcli','assets')
 const port = process.env.PORT | 8000
 sockets.whenReady(
     ()=>{
 
+        app.use(
+            '/',express.static(path.join(assets))
+        )
+        app.use(
+            '/css',express.static(path.join(assets,'css'))
+        )
+        app.use(
+            '/js',express.static(path.join(assets,'js'))
+        )
         app.use(
             '/ear',express.static(path.join(process.cwd(),'node_modules','@tek-tech/ears/ears.js'))
         )

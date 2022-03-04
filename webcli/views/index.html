@@ -3,83 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="/css/master.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
 <body>
-    <style>
-        body{
-            margin:0;
-            padding:0;
-            width:100vw;
-            height: 100vh;
-            overflow:hidden;
-            overflow-y: scroll;
-        }  
-        #main{
-            display:flex;
-            flex-direction:column;
-            height: 100%;
-            width:100%;
-        }
-        #main nav{
-            display:flex;
-            flex-direction:column;
-            justify-content:center;
-        }
-        #main nav ul{
-            background:#800000;
-            display: flex;
-            margin:0;
-            padding:0;
-            flex-direction: row;
-            justify-content: space-between;
-        }
-        #main nav ul .actual{
-            background: #e10405;
-        }
-        #main nav ul li{
-            width:46%;
-            text-align:center;
-            list-style-type: none;
-            padding:2%;
-        }
-        #main #view{
-            background:#1f1b23;
-            display:flex;
-            flex-direction:column;
-            width:100%;
-            height:100%;
-            margin:0;
-            padding:0;
-        }
-        #main #view fieldset{
-            padding:2%;
-            width:96%;
-            margin:0;
-            display:flex;
-            flex-direction:row;
-        }
-        #main #view fieldset > *{
-            width:44%;
-        }
-        #main #view fieldset > * > *{
-            width:100%;
-        }
-        #main #view fieldset > *:first-of-type{
-            width:84%;
-        }
-        #main #view fieldset > *:last-of-type button{
-            background: #e10405;
-        }
-        #main #view ul{
-            padding:2%;
-            height:96%;
-            display:flex;
-            flex-direction:row;
-        }
-
-    </style>
     <section id='main'>
         <nav id='views-list'>
             <ul>
@@ -112,8 +40,8 @@
     <script src='/sio'>
     </script>
     <script src="/siosocket"></script>
+    <script src="/js/master.js"></script>
     <script>
-        const socket = new TeeSioCliSocket()
         // socket.post(
         //     'getVid'
         //     ,'https://www.youtube.com/watch?v=fj77YLxJ5rM&list=TLPQMjkwMTIwMjIVHvClMO6F2w&index=2'
@@ -125,17 +53,17 @@
         //         }
         //     }
         // )
-        socket.post(
-            'searchVid'
-            ,'seyba anarchy'
-            ,({e,r})=>{
-                if(e)console.log(e)
-                else{
-                    alert('search vid res')
-                    console.log(r)
-                }
-            }
-        )
+        // socket.post(
+        //     'searchVid'
+        //     ,'seyba anarchy'
+        //     ,({e,r})=>{
+        //         if(e)console.log(e)
+        //         else{
+        //             alert('search vid res')
+        //             console.log(r)
+        //         }
+        //     }
+        // )
 
     </script>
 </body>
