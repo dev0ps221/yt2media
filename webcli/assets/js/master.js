@@ -77,9 +77,6 @@ function renderDownloadLinks(formats){
     formats.forEach(
         format=>{
             rendered = `${rendered}
-            <li class='preview'>
-                <video src='${format.url}' controls/>
-            </li>
             <li class='download'>
                 download ${format.ext} format
                 <ul>
@@ -87,7 +84,10 @@ function renderDownloadLinks(formats){
                         Size : ${bytesToSize(format.filesize)}
                     </li>
                     <li>
-                        Download link : <a href='${format.url}'>${bytesToSize(format.filesize)}</a>
+                        Quality : ${format.quality}
+                    </li>
+                    <li>
+                        Download link : <a title='${format.title}' href='${format.url}'>${bytesToSize(format.filesize)}</a>
                     </li>
                 </ul>
             </li>`
@@ -97,6 +97,12 @@ function renderDownloadLinks(formats){
 }
 
 function renderVidContent(video){
+
+    video.requested_formats = video.requested_formats.map(f=>{
+        f.title = video.title
+        console.log(f)
+        return f 
+    })
     return `
         <li class='videoresult'>
             <ul>
@@ -112,7 +118,7 @@ function renderVidContent(video){
                 }
                 <li class='downloads'>
                     DOWNLOAD ${video.title}:
-                    <ul>
+                    <ul> 
                         ${renderDownloadLinks(video.requested_formats)}
                     </ul>
                 </li>
