@@ -28,20 +28,24 @@
             justify-content:center;
         }
         #main nav ul{
+            background:#800000;
             display: flex;
             margin:0;
             padding:0;
             flex-direction: row;
             justify-content: space-between;
         }
+        #main nav ul .actual{
+            background: #e10405;
+        }
         #main nav ul li{
             width:46%;
             text-align:center;
-            background:red;
             list-style-type: none;
             padding:2%;
         }
         #main #view{
+            background:#1f1b23;
             display:flex;
             flex-direction:column;
             width:100%;
@@ -56,6 +60,18 @@
             display:flex;
             flex-direction:row;
         }
+        #main #view fieldset > *{
+            width:44%;
+        }
+        #main #view fieldset > * > *{
+            width:100%;
+        }
+        #main #view fieldset > *:first-of-type{
+            width:84%;
+        }
+        #main #view fieldset > *:last-of-type button{
+            background: #e10405;
+        }
         #main #view ul{
             padding:2%;
             height:96%;
@@ -67,7 +83,7 @@
     <section id='main'>
         <nav id='views-list'>
             <ul>
-                <li>
+                <li class='actual'>
                     SEARCH
                 </li>
                 <li>
