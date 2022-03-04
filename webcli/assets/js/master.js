@@ -87,7 +87,7 @@ function renderDownloadLinks(formats){
                         Size : ${bytesToSize(format.filesize)}
                     </li>
                     <li>
-                        Download link : <a href='${format.url}'>${bytesToSize(format.filesize)}
+                        Download link : <a href='${format.url}'>${bytesToSize(format.filesize)}</a>
                     </li>
                 </ul>
             </li>`
