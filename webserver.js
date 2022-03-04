@@ -11,6 +11,41 @@ const views = path.join(__dirname,'webcli','views')
 const assets = path.join(__dirname,'webcli','assets')
 const port = process.env.PORT | 8000
 
+
+app.use(
+    '/',express.static(path.join(assets))
+)
+app.use(
+    '/css',express.static(path.join(assets,'css'))
+)
+app.use(
+    '/js',express.static(path.join(assets,'js'))
+)
+app.use(
+    '/ear',express.static(path.join(process.cwd(),'node_modules','@tek-tech/ears/ears.js'))
+)
+app.use(
+    '/sio',express.static(path.join(process.cwd(),'node_modules','socket.io/client-dist/socket.io.min.js'))
+)
+app.use(
+    '/socket.io.min.js.map',express.static(path.join(process.cwd(),'node_modules','socket.io/client-dist/socket.io.min.js.map'))
+)
+app.get(
+    '/siosocket',(req,res)=>{
+        res.send(
+            (require('fs').readFileSync(sockets.getSocketClassPath()).toString())
+        )
+    }
+)
+app.get(
+    '/',(req,res)=>{
+        res.sendFile(
+            path.join(views,'index.html')
+        )
+
+
+    }
+)
 server.listen(
     port,(err)=>{
 
@@ -22,46 +57,12 @@ server.listen(
 
             return
         }else{
-        
-            sockets.listen()
-        
+            
             sockets.whenReady(
                 ()=>{
-
-                    app.use(
-                        '/',express.static(path.join(assets))
-                    )
-                    app.use(
-                        '/css',express.static(path.join(assets,'css'))
-                    )
-                    app.use(
-                        '/js',express.static(path.join(assets,'js'))
-                    )
-                    app.use(
-                        '/ear',express.static(path.join(process.cwd(),'node_modules','@tek-tech/ears/ears.js'))
-                    )
-                    app.use(
-                        '/sio',express.static(path.join(process.cwd(),'node_modules','socket.io/client-dist/socket.io.min.js'))
-                    )
-                    app.use(
-                        '/socket.io.min.js.map',express.static(path.join(process.cwd(),'node_modules','socket.io/client-dist/socket.io.min.js.map'))
-                    )
-                    app.get(
-                        '/siosocket',(req,res)=>{
-                            res.send(
-                                (require('fs').readFileSync(sockets.getSocketClassPath()).toString())
-                            )
-                        }
-                    )
-                    app.get(
-                        '/',(req,res)=>{
-                            res.sendFile(
-                                path.join(views,'index.html')
-                            )
-
-
-                        }
-                    )
+                    
+                    sockets.listen()
+                    
                     sockets.registerSocketListener(
                         [
                             'getVid',(url,socket)=>{
