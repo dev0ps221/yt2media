@@ -1,6 +1,6 @@
 const { app, BrowserWindow ,ipcMain} = require('electron');
 const path = require('path');
-const ytdl = require("youtube-dl-exec")
+const ytee = require('ytee')
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
   app.quit();
 }
@@ -20,30 +20,21 @@ const createWindow = () => {
   ipcMain.on(
     'getVid'
     ,(s,url)=>{
-          let stream = ytdl(
-            url,
-            {
-              dumpSingleJson: true,
-              noWarnings: true,
-              noCallHome: true,
-              noCheckCertificate: true,
-              preferFreeFormats: true,
-              youtubeSkipDashManifest: true,
-              referer: 'https://example.com'
-            }
-          ).then(
-            data=>{
-              if(data.title){
-                const {title,requested_formats,duration,thumbnails} = data
-                  ,resp = {title,requested_formats,duration,thumbnails}
-                  s.reply(
-                    'getVid'
-                    ,resp
-                  )
-                  console.log(data)
-              }
-            }
-          )
+      const download  = new ytee.Download(url)
+      download.whenReady(
+        ()=>{
+          const data = download.data
+          if(data.title){
+            const {title,requested_formats,duration,thumbnails} = data
+              ,resp = {title,requested_formats,duration,thumbnails}
+              s.reply(
+                'getVid'
+                ,resp
+              )
+              console.log(data)
+          }
+        }
+      )
     }
   )
 };
