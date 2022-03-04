@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    okay
+    <script src='/ear'>
+    </script>
+    <script src='/sio'>
+    </script>
+    <script src="/siosocket"></script>
+    <script>
+        const socket = new TeeSioCliSocket()
+        // socket.post(
+        //     'getVid'
+        //     ,'https://www.youtube.com/watch?v=fj77YLxJ5rM&list=TLPQMjkwMTIwMjIVHvClMO6F2w&index=2'
+        //     ,({e,r})=>{
+        //         if(e)console.log(e)
+        //         else{
+        //                     alert('get vid res')
+        //             console.log(r)
+        //         }
+        //     }
+        // )
+        socket.post(
+            'searchVid'
+            ,'seyba'
+            ,({e,r})=>{
+                if(e)console.log(e)
+                else{
+                            alert('get vid res')
+                    console.log(r)
+                }
+            }
+        )
+
+    </script>
+</body>
+</html>
