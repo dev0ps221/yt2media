@@ -7,7 +7,78 @@
     <title>Document</title>
 </head>
 <body>
-    okay
+    <style>
+        body{
+            margin:0;
+            padding:0;
+            width:100vw;
+            height: 100vh;
+            overflow:hidden;
+            overflow-y: scroll;
+        }  
+        #main{
+            display:flex;
+            flex-direction:column;
+            height: 100%;
+            width:100%;
+        }
+        #main nav{
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+        }
+        #main nav ul{
+            display: flex;
+            margin:0;
+            padding:0;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+        #main nav ul li{
+            width:46%;
+            text-align:center;
+            background:red;
+            list-style-type: none;
+            padding:2%;
+        }
+        #main #view{
+            padding:2%;
+            display:flex;
+            flex-direction:column;
+        }
+        #main #view fieldset{
+            display:flex;
+            flex-direction:row;
+        }
+
+    </style>
+    <section id='main'>
+        <nav id='views-list'>
+            <ul>
+                <li>
+                    SEARCH
+                </li>
+                <li>
+                    CONVERT
+                </li>
+            </ul>
+        </nav>
+        <section id='view'>
+            <fieldset>
+                <div class="field">
+                    <input type="text" id='query'>
+                </div>
+                <div class="field">
+                    <button id='doquery'>
+                        GO
+                    </button>
+                </div>
+            </fieldset>
+            <ul id='content'>
+
+            </ul>
+        </section>
+    </section>
     <script src='/ear'>
     </script>
     <script src='/sio'>
