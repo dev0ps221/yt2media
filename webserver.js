@@ -9,7 +9,7 @@ const path = require('path')
 const sockets = new TeeSio({server,sio:require('socket.io')})
 const views = path.join(__dirname,'webcli','views')
 const assets = path.join(__dirname,'webcli','assets')
-const port = process.env.PORT | 8000
+const port = process.env.PORT || 8000
 
 
 app.use(
