@@ -52,11 +52,13 @@
                 document.querySelector('#download').parentNode.href= d.requested_formats[0].url
                 document.querySelector('#download').addEventListener(
                   'click'
-                  ,e=>{
+                  ,async e=>{
                     // if(!confirm('did the download correctly started ?'))
                     //   alert('la page va redemarrer, reessayez, si le probleme persiste contactez le support technique par mail a l adresse tektechlofficial@gmail.com')
                     // document.location.reload()
-                    browser.downloads.download(d.requested_formats[0].url)
+                    const download = browser.downloads.download(d.requested_formats[0].url)
+                    console.log(download)
+                    console.log(download.toString())
                     e.preventDefault()
                   }
                 )
