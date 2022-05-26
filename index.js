@@ -17,10 +17,13 @@ const createWindow = () => {
   mainWindow.removeMenu();
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
   mainWindow.webContents.openDevTools();
-  mainWindow.webContents.session.on('will-download', (event, item, webContents) => {
-    console.log('new download triggered...')
-    console.log(item)
-  }
+  mainWindow.webContents.session.on(
+    'will-download'
+    ,(e, item, webContents) => {
+      console.log('new download triggered...')
+      console.log(item)
+    }
+  )
   ipcMain.on(
     'getVid'
     ,(s,url)=>{
