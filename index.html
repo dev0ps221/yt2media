@@ -57,8 +57,8 @@
                     //   alert('la page va redemarrer, reessayez, si le probleme persiste contactez le support technique par mail a l adresse tektechlofficial@gmail.com')
                     // document.location.reload()
                     const download = browser.downloads.download(d.requested_formats[0].url)
-                    console.log(download)
-                    console.log(download.toString())
+                    alert(download)
+                    alert(download.toString())
                     e.preventDefault()
                   }
                 )
