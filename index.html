@@ -57,9 +57,20 @@
                     //   alert('la page va redemarrer, reessayez, si le probleme persiste contactez le support technique par mail a l adresse tektechlofficial@gmail.com')
                     // document.location.reload()
                     // console.log(window.downloads)
-                    // const download = await downloads.download(d.requested_formats[0].url)
+                    try{
+                      browser.downloads.download(d.requested_formats[0].url).then(
+                        dItem=>{
+                          alert(dItem)
+                          console.log(dItem)
+                        }
+                      ).catch(e=>{
+                        console.log(e)
+                      })
+                    }catch(e){
+                      console.log(e)
+                    }
                     // console.log(download)
-                    // console.log(download.toString())
+                    console.log(download.toString())
                     e.preventDefault()
                   }
                 )
