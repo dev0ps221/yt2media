@@ -31,7 +31,6 @@ const createWindow = () => {
                 'getVid'
                 ,resp
               )
-              console.log(data)
           }
         }
       )

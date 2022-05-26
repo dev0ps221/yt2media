@@ -22,7 +22,12 @@ rl.question(
                     console.log('size: ' + info.size)
                     stream.pipe(pipe)
                     // rl.close()
-                  })
+                })
+                stream.on(
+                    'end',data=>{
+                        
+                    }
+                )
             }
         )
 
