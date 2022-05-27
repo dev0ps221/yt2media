@@ -28,7 +28,11 @@
 
     </section>
     <script>
-
+      function percentNumber(ttal,num){
+        const oneperc = ttal/100
+        const perc = num / oneperc
+        return perc
+      }
       const {ipcRenderer} = require('electron'),
       go = document.querySelector('#go')
       go.addEventListener(
@@ -60,8 +64,10 @@
                       {url,name}
                     )
                     ipcRenderer.on(
-                      'download-progress',(s,data)=>{
-                        console.log(data," is download data")
+                      'download-progress',(s,{ttal,recv,name,done,ispa,canr})=>{
+                        console.clear()
+                        const downloadPerc = percentNumber(ttal,recv)
+                        console.log('download progress...',percentNumber,'%')
                       }
                     )
                     e.preventDefault()
