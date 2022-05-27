@@ -29,15 +29,12 @@ const createWindow = () => {
       let canr = item.canResume()  
       console.log(item.getSavePath())
       item.on('updated', (event, state) => {
-        console.log(state)
         ttal = item.getTotalBytes()
         recv = item.getReceivedBytes()
         name = item.getFilename()
         done = item.isDone()
         ispa = item.isPaused()
         canr = item.canResume()
-        console.log('download update')
-        console.log(state)
         if (state === 'interrupted') {
           mainWindow.webContents.send(
             'download-interupted',{
@@ -62,9 +59,16 @@ const createWindow = () => {
       })
       item.on(
         'done',(e,state)=>{
+
+          ttal = item.getTotalBytes()
+          recv = item.getReceivedBytes()
+          name = item.getFilename()
+          done = item.isDone()
+          ispa = item.isPaused()
+          canr = item.canResume()
           if(state=='completed'){
             mainWindow.webContents.send(
-              'download-completed',{
+              'download-complete',{
                 ttal,recv,name,done,ispa,canr
               }
             )

@@ -59,15 +59,101 @@
                   ,e=>{
                     const url = d.requested_formats[0].url
                     const name = `${d.title}.mp4`
+                    let lastPerc = 0
+                    let percSimilarity = 0
                     ipcRenderer.send(
                       'download',
                       {url,name}
                     )
                     ipcRenderer.on(
                       'download-progress',(s,{ttal,recv,name,done,ispa,canr})=>{
-                        console.clear()
                         const downloadPerc = percentNumber(ttal,recv)
-                        console.log('download progress...',percentNumber,'%')
+                        if(lastPerc == downloadPerc){
+                          percSimilarity ++
+                          if(percSimilarity>5){
+
+                            document.querySelector(
+                              '#pvw_section'
+                            ).innerHTML = `
+                                <h1 id='pvw_title'>
+                                  Download Cancelled
+                                </h1>
+                              <img id='pvw_img'/>
+                              <a id='download_link' target="_blank" download>
+                                <button id='download'>
+                                  download
+                                </button>
+                              </a>
+                            `
+                            return 
+                          }
+
+                        }
+                        document.querySelector('#pvw_section').innerHTML = `
+
+                            <h1 id='pvw_title'>
+                              download status 
+                            </h1>
+                            <span style='display:flex;flex-direction:row;background:red;width:${downloadPerc};'>
+                            </span>
+                            <p>
+                              Downloading ${downloadPerc}%
+                            </p>
+
+                        `
+                        console.clear()
+                        console.log('download progress...',downloadPerc,'%')
+                      }
+                    )
+                    ipcRenderer.on(
+                      'download-complete',(s,data)=>{
+                        document.querySelector(
+                          '#pvw_section'
+                        ).innerHTML = `
+                            <h1 id='pvw_title'>
+                              Download done
+                            </h1>
+                          <img id='pvw_img'/>
+                          <a id='download_link' target="_blank" download>
+                            <button id='download'>
+                              download
+                            </button>
+                          </a>
+                        `
+                      }
+                    )
+                    ipcRenderer.on(
+                      'download-interupted',(s,data)=>{
+                        document.querySelector(
+                          '#pvw_section'
+                        ).innerHTML = `
+                            <h1 id='pvw_title'>
+                              Download Cancelled
+                            </h1>
+                          <img id='pvw_img'/>
+                          <a id='download_link' target="_blank" download>
+                            <button id='download'>
+                              download
+                            </button>
+                          </a>
+                        `
+                      }
+                    )
+                    ipcRenderer.on(
+                      'download-pause',(s,data)=>{
+                        document.querySelector(
+                          '#pvw_section'
+                        ).innerHTML = `
+                            <h1 id='pvw_title'>
+                              Download Cancelled
+                            </h1>
+                          <img id='pvw_img'/>
+                          <a id='download_link' target="_blank" download>
+                            <button id='download'>
+                              download
+                            </button>
+                          </a>
+                        `
                       }
                     )
                     e.preventDefault()
