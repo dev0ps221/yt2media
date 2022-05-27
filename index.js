@@ -21,29 +21,38 @@ const createWindow = () => {
     'will-download'
     ,(e, item, webContents) => {
       mainWindow.currentDownloadItem = item
-      const ttal = item.getTotalBytes()
-      const recv = item.getReceivedBytes()
-      const name = item.getFilename()
-      const done = item.isDone()
-      const ispa = item.isPaused()
-      const canr = item.canResume()  
-      console.log(item)
+      let ttal = item.getTotalBytes()
+      let recv = item.getReceivedBytes()
+      let name = item.getFilename()
+      let done = item.isDone()
+      let ispa = item.isPaused()
+      let canr = item.canResume()  
+      console.log(item.getSavePath())
       item.on('updated', (event, state) => {
+        console.log(state)
+        ttal = item.getTotalBytes()
+        recv = item.getReceivedBytes()
+        name = item.getFilename()
+        done = item.isDone()
+        ispa = item.isPaused()
+        canr = item.canResume()
+        console.log('download update')
+        console.log(state)
         if (state === 'interrupted') {
-          ipcMain.emit(
+          mainWindow.webContents.send(
             'download-interupted',{
               ttal,recv,name,done,ispa,canr
             }
           )
         } else if (state === 'progressing') {
           if (item.isPaused()) {
-            ipcMain.emit(
+            mainWindow.webContents.send(
               'download-pause',{
                 ttal,recv,name,done,ispa,canr
               }
             )
           } else {
-            ipcMain.emit(
+            mainWindow.webContents.send(
               'download-progress',{
                 ttal,recv,name,done,ispa,canr
               }
@@ -51,6 +60,22 @@ const createWindow = () => {
           }
         }
       })
+      item.on(
+        'done',(e,state)=>{
+          if(state=='completed'){
+            mainWindow.webContents.send(
+              'download-completed',{
+                ttal,recv,name,done,ispa,canr
+              }
+            )
+          }
+        }
+      )
+      mainWindow.webContents.send(
+        'download-progress',{
+          ttal,recv,name,done,ispa,canr
+        }
+      )
     }
   )
 
