@@ -27,16 +27,39 @@ const createWindow = () => {
       const done = item.isDone()
       const ispa = item.isPaused()
       const canr = item.canResume()  
-      s.reply(
-        'download-progression',{
-          ttal,recv,name,done,ispa,canr
+      console.log(item)
+      item.on('updated', (event, state) => {
+        if (state === 'interrupted') {
+          ipcMain.emit(
+            'download-interupted',{
+              ttal,recv,name,done,ispa,canr
+            }
+          )
+        } else if (state === 'progressing') {
+          if (item.isPaused()) {
+            ipcMain.emit(
+              'download-pause',{
+                ttal,recv,name,done,ispa,canr
+              }
+            )
+          } else {
+            ipcMain.emit(
+              'download-progress',{
+                ttal,recv,name,done,ispa,canr
+              }
+            )
+          }
         }
-      )
+      })
     }
   )
+
+
+
   ipcMain.on(
     'download',
-    (s,{url})=>{
+    (s,{url,name})=>{
+      mainWindow.currentDownloadFilename = name
       mainWindow.webContents.downloadURL(
         url
       )

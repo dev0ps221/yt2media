@@ -54,19 +54,16 @@
                   'click'
                   ,e=>{
                     const url = d.requested_formats[0].url
-                    // const {dialog} = require('electron').remote;
-
-                    // dialog.showOpenDialog({
-                    //   properties: ["openDirectory","openFile"]
-                    // },function (fileNames) {
-                    //   // do cool stuff here
-                    //   console.log('filenames')
-                    // });
+                    const name = `${d.title}.mp4`
                     ipcRenderer.send(
                       'download',
-                      {url}
+                      {url,name}
                     )
-                    // browser.downloads.download(d.requested_formats[0].url)
+                    ipcRenderer.on(
+                      'download-progress',(s,data)=>{
+                        console.log(data," is download data")
+                      }
+                    )
                     e.preventDefault()
                   
                   }
