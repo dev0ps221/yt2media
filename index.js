@@ -20,8 +20,26 @@ const createWindow = () => {
   mainWindow.webContents.session.on(
     'will-download'
     ,(e, item, webContents) => {
-      console.log('new download triggered...')
-      console.log(item)
+      mainWindow.currentDownloadItem = item
+      const ttal = item.getTotalBytes()
+      const recv = item.getReceivedBytes()
+      const name = item.getFilename()
+      const done = item.isDone()
+      const ispa = item.isPaused()
+      const canr = item.canResume()  
+      s.reply(
+        'download-progression',{
+          ttal,recv,name,done,ispa,canr
+        }
+      )
+    }
+  )
+  ipcMain.on(
+    'download',
+    (s,{url})=>{
+      mainWindow.webContents.downloadURL(
+        url
+      )
     }
   )
   ipcMain.on(

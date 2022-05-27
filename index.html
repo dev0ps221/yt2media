@@ -53,25 +53,22 @@
                 document.querySelector('#download').addEventListener(
                   'click'
                   ,e=>{
-                    // if(!confirm('did the download correctly started ?'))
-                    //   alert('la page va redemarrer, reessayez, si le probleme persiste contactez le support technique par mail a l adresse tektechlofficial@gmail.com')
-                    // document.location.reload()
-                    // console.log(window.downloads)
-                    try{
-                      browser.downloads.download(d.requested_formats[0].url).then(
-                        dItem=>{
-                          alert(dItem)
-                          console.log(dItem)
-                        }
-                      ).catch(e=>{
-                        console.error(e)
-                      })
-                    }catch(e){
-                      console.error(e)
-                    }
-                    // console.log(download)
-                    // console.log(download.toString())
+                    const url = d.requested_formats[0].url
+                    // const {dialog} = require('electron').remote;
+
+                    // dialog.showOpenDialog({
+                    //   properties: ["openDirectory","openFile"]
+                    // },function (fileNames) {
+                    //   // do cool stuff here
+                    //   console.log('filenames')
+                    // });
+                    ipcRenderer.send(
+                      'download',
+                      {url}
+                    )
+                    // browser.downloads.download(d.requested_formats[0].url)
                     e.preventDefault()
+                  
                   }
                 )
               }
