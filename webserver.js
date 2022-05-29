@@ -81,17 +81,17 @@ server.listen(
 
                                 const download  = new ytee.Download(url)
                                 download.whenReady(
-                                ()=>{
-                                    const data = download.data
-                                    if(data.title){
-                                    const 
-                                        {title,requested_formats,duration,thumbnails} = data
-                                        ,resp = {title,requested_formats,duration,thumbnails}
-                                        socket.post(
-                                            'getVidRes',({e:null,r:resp})
-                                        )
+                                    ()=>{
+                                        const data = download.data
+                                        if(data.title){
+                                            const   {title,formats,duration,thumbnails} = data
+                                            ,resp = {title,formats,duration,thumbnails}
+                                            console.log(data,' is the result')
+                                            socket.post(
+                                                'getVidRes',({e:null,r:resp})
+                                            )
+                                        }
                                     }
-                                }
                                 )
                             }
                         ]

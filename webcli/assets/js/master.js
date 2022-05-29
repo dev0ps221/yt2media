@@ -40,7 +40,8 @@ function doAction(){
 
     actualViewTab(
         tab=>{
-            const action = tab.innerText.toLowerCase() == 'search' ? 'searchVid' : 'getVid'
+            const action = tab.innerText.toLowerCase() == 'search' || tab.innerText.toLowerCase() == 'chercher' ? 'searchVid' : 'getVid'
+            
             const query = document.querySelector('#query').value
             if(query){
                 socket.post(
@@ -98,7 +99,7 @@ function renderDownloadLinks(formats){
 
 function renderVidContent(video){
 
-    video.requested_formats = video.requested_formats.map(f=>{
+    video.requested_formats = video.formats.map(f=>{
         f.title = video.title
         console.log(f)
         return f 
@@ -112,7 +113,7 @@ function renderVidContent(video){
                 ${  
                     video.thumbnails && video.thumbnails.length ?
                         `<li class='illus'>
-                            ${renderVideoThumbnail(video.thumbnails[0])}
+                            ${renderVideoThumbnail(video.thumbnail)}
                         </li>`
                     :   ''
                 }
@@ -129,11 +130,18 @@ function renderVidContent(video){
 
 function refreshContentView(videos){
     const contentview = document.querySelector('#view ul')
-    videos.forEach(
-        video=>{
-            contentview.innerHTML+=renderVidContent(video)
+    if(videos){
+        if(typeof videos == 'Array'){
+            videos.forEach(
+                video=>{
+                    contentview.innerHTML+=renderVidContent(video)
+                }
+            )
+        }else{
+            video = videos
+            contentview.innerHTML+=renderVidContent(video)            
         }
-    )
+    }
 }
 
 function listenDoAction(){
