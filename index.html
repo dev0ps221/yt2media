@@ -31,7 +31,8 @@
       function percentNumber(ttal,num){
         const oneperc = ttal/100
         const perc = num / oneperc
-        return perc
+        console.log(parseInt(perc))
+        return parseInt(perc)
       }
       const {ipcRenderer} = require('electron'),
       go = document.querySelector('#go')
@@ -44,7 +45,6 @@
               'getVid',
               val
             )
-
             document.querySelector('#please_wait').style.display = 'block'
             ipcRenderer.on(
               'getVid'
@@ -69,24 +69,27 @@
                       'download-progress',(s,{ttal,recv,name,done,ispa,canr})=>{
                         const downloadPerc = percentNumber(ttal,recv)
                         if(lastPerc == downloadPerc){
-                          percSimilarity ++
-                          if(percSimilarity>5){
+                          setTimeout(
+                            ()=>{
 
-                            document.querySelector(
-                              '#pvw_section'
-                            ).innerHTML = `
-                                <h1 id='pvw_title'>
-                                  Download Cancelled
-                                </h1>
-                              <img id='pvw_img'/>
-                              <a id='download_link' target="_blank" download>
-                                <button id='download'>
-                                  download
-                                </button>
-                              </a>
-                            `
-                            return 
-                          }
+                              if(lastPerc == downloadPerc){
+                                document.querySelector(
+                                  '#pvw_section'
+                                ).innerHTML = `
+                                    <h1 id='pvw_title'>
+                                      Download Error|Aborted
+                                    </h1>
+                                  <img id='pvw_img'/>
+                                  <a id='download_link' target="_blank" download>
+                                    <button id='download'>
+                                      download
+                                    </button>
+                                  </a>
+                                `
+                                return 
+                              }
+                            },1500
+                          )
 
                         }
                         document.querySelector('#pvw_section').innerHTML = `
@@ -101,8 +104,6 @@
                             </p>
 
                         `
-                        console.clear()
-                        console.log('download progress...',downloadPerc,'%')
                       }
                     )
                     ipcRenderer.on(

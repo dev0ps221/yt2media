@@ -5,13 +5,13 @@ const app     = new express()
 const server = http.createServer(app)
 const ytee = require('ytee')
 const searcher  = ytee.Searcher
+const fs = require('fs')
 const path = require('path')
 const sockets = new TeeSio({server,sio:require('socket.io')})
+const siosocket = fs.readFileSync(path.join(__dirname,'node_modules/@tek-tech/teesio-socket/TeeSioSocket.js')).toString()
 const views = path.join(__dirname,'webcli','views')
 const assets = path.join(__dirname,'webcli','assets')
 const port = process.env.PORT | 8000
-
-
 app.use(
     '/',express.static(path.join(assets))
 )
@@ -33,7 +33,7 @@ app.use(
 app.get(
     '/siosocket',(req,res)=>{
         res.send(
-            (require('fs').readFileSync(sockets.getSocketClassPath()).toString())
+            siosocket
         )
     }
 )
@@ -48,73 +48,61 @@ app.get(
 )
 server.listen(
     port,(err)=>{
-
-
-
         if(err){
             console.warn('erreurs lors de la tentative de lancement du service sur le port ',port)
             console.error(err)
-
             return
         }else{
-            
             sockets.whenReady(
                 ()=>{
-                    
                     sockets.listen()
-                    
                     sockets.registerSocketListener(
                         [
                             'getVid',(url,socket)=>{
-
                                 const download  = new ytee.Download(url)
                                 download.whenReady(
-                                ()=>{
-                                    const data = download.data
-                                    if(data.title){
-                                    const 
-                                        {title,requested_formats,duration,thumbnails} = data
-                                        ,resp = {title,requested_formats,duration,thumbnails}
-                                        socket.post(
-                                            'getVidRes',({e:null,r:resp})
-                                        )
+                                    ()=>{
+                                        const data = download.data
+                                        if(data.title){
+                                        const 
+                                            {title,requested_formats,duration,thumbnails} = data
+                                            ,resp = {title,requested_formats,duration,thumbnails}
+                                            socket.post(
+                                                'getVidRes',({e:null,r:resp})
+                                            )
+                                        }
                                     }
-                                }
                                 )
                             }
                         ]
                     )
                     sockets.registerSocketListener(
                         [
-
                             'searchVid',(name,socket)=>{
                                 const res = []
                                 searcher.search(name,results=>{
                                     results.forEach(
                                         (result,idx)=>{
-
                                             result.whenReady(
                                                 ()=>{
-                                                const data = result._downloaddata
-                                                if(data.title){
-                                                    const 
-                                                    {title,requested_formats,duration,thumbnails} = data
-                                                    ,resp = {title,requested_formats,duration,thumbnails}
-                                                    res.push(
-                                                        resp
-                                                    )
-                                                    if(idx+1==results.length){
-                                                        socket.post(
-                                                            'searchVidRes',({e:null,r:res})
+                                                    const data = result._downloaddata
+                                                    if(data.title){
+                                                        const 
+                                                        {title,requested_formats,duration,thumbnails} = data
+                                                        ,resp = {title,requested_formats,duration,thumbnails}
+                                                        res.push(
+                                                            resp
                                                         )
+                                                        if(idx+1==results.length){
+                                                            socket.post(
+                                                                'searchVidRes',({e:null,r:res})
+                                                            )
+                                                        }
                                                     }
                                                 }
-                                                }
                                             )
-
                                         }       
                                     )
-
                                 })
 
                             }
@@ -124,18 +112,8 @@ server.listen(
                     console.log(
                         'sockets ready'
                     )
-
-
                 }
             )
-
-
-        
-        
-        
-        
-        
-        
             console.log('Service actif sur le port ',port)
         }
     }

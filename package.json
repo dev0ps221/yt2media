@@ -42,7 +42,9 @@
     }
   },
   "dependencies": {
-    "@tek-tech/teesio": "^0.0.1-dIeet.1",
+    "@tek-tech/ears": "^0.0.3-beta-2-cli-multi-ev-0.1",
+    "@tek-tech/teesio": "^0.0.1-cli-beta.1.0-bl",
+    "@tek-tech/teesio-socket": "^0.0.1-cli",
     "electron-squirrel-startup": "^1.0.0",
     "express": "^4.17.3",
     "socket.io": "^4.4.1",
