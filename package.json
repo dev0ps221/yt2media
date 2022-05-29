@@ -41,7 +41,7 @@
     "@tek-tech/teesio": "^0.0.1-dIeet.1",
     "express": "^4.17.3",
     "socket.io": "^4.4.1",
-    "ytee": "^1.0.0"
+    "ytee": "^1.0.1"
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.54",
