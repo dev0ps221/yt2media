@@ -76,22 +76,13 @@ function renderVideoThumbnail(thumb){
 function renderDownloadLinks(formats){
     let rendered = ``
     formats.forEach(
-        format=>{
-            rendered = `${rendered}
-            <li class='download'>
-                download ${format.ext} format
-                <ul>
-                    <li>
-                        Size : ${bytesToSize(format.filesize)}
-                    </li>
-                    <li>
-                        Quality : ${format.quality}
-                    </li>
-                    <li>
-                        Download link : <a title='${format.title}' href='${format.url}'>${bytesToSize(format.filesize)}</a>
-                    </li>
-                </ul>
-            </li>`
+        (format,idx)=>{
+            if(idx+1==formats.length){
+                rendered = `${rendered}
+                <li class='download'>
+                    <a title='${format.title}' download target='_blank' href='${format.url}'> telecharger au format ${format.ext}  </a>
+                </li>`
+            }
         }
     )
     return rendered
@@ -101,7 +92,6 @@ function renderVidContent(video){
 
     video.requested_formats = video.formats.map(f=>{
         f.title = video.title
-        console.log(f)
         return f 
     })
     return `
@@ -113,12 +103,11 @@ function renderVidContent(video){
                 ${  
                     video.thumbnails && video.thumbnails.length ?
                         `<li class='illus'>
-                            ${renderVideoThumbnail(video.thumbnail)}
+                            ${renderVideoThumbnail(video.thumbnails[0])}
                         </li>`
                     :   ''
                 }
                 <li class='downloads'>
-                    DOWNLOAD ${video.title}:
                     <ul> 
                         ${renderDownloadLinks(video.requested_formats)}
                     </ul>
@@ -134,12 +123,12 @@ function refreshContentView(videos){
         if(typeof videos == 'Array'){
             videos.forEach(
                 video=>{
-                    contentview.innerHTML+=renderVidContent(video)
+                    contentview.innerHTML=`${contentview.innerHTML}${renderVidContent(video)}`
                 }
             )
         }else{
             video = videos
-            contentview.innerHTML+=renderVidContent(video)            
+            contentview.innerHTML=`${contentview.innerHTML}${renderVidContent(video)}`            
         }
     }
 }
