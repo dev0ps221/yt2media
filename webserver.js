@@ -79,8 +79,9 @@ server.listen(
                     sockets.registerSocketListener(
                         [
                             'searchVid',(name,socket)=>{
+                                console.log('we are searching')
                                 const res = []
-                                searcher.search(name,results=>{
+                                searcher.search(`ytsearch:${name}`,results=>{
                                     results.forEach(
                                         (result,idx)=>{
                                             result.whenReady(
