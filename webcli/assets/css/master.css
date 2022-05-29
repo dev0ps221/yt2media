@@ -155,3 +155,97 @@ body{
 
 
 
+body{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height:100vh;
+    width:100vw;
+    color: #fff;
+}
+header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0;
+    position: sticky;
+    top: 0;
+    padding: 2vw;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    width: 96vw;
+    height: 6vh;
+    color: #ffcc00ff;
+    background: #111c;
+}
+header #main-heading{
+    display: flex;
+    color: #0088aaff;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    width: 35%;
+}
+nav{
+    display: flex;
+    color: #0088aaff;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    width: 50%;
+}
+nav a{
+    display: flex;
+    color: #fff;
+    flex-direction: column;
+    justify-content: center;
+    margin: 1%;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+#container{
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 20vw;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    width: 60vw;
+    min-height: 86vh;
+    background: #28220bff;
+    
+    background: url('/bgs/bg.jpg');
+    background-size:100% 150%;
+}
+#container #main{
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 2%;
+    width: 96%;
+    background: #216778ff;
+    height: 100%;
+}
+@media screen and (max-width:997px){
+    body{
+        font-size: 12px;
+    }
+    #container{
+        padding: 0;
+        width: 100%;
+    }
+    header{
+        flex-direction: column;
+    }
+    header * {
+        text-align: center;
+    }
+    header #main-heading,nav{
+        width: 100%;
+    }
+}

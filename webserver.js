@@ -16,6 +16,9 @@ app.use(
     '/',express.static(path.join(assets))
 )
 app.use(
+    '/bgs',express.static(path.join(assets,'bgs'))
+)
+app.use(
     '/css',express.static(path.join(assets,'css'))
 )
 app.use(
