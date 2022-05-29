@@ -9,6 +9,8 @@ const path = require('path')
 const sockets = new TeeSio({server,sio:require('socket.io')})
 const views = path.join(__dirname,'webcli','views')
 const assets = path.join(__dirname,'webcli','assets')
+const fs = require('fs')
+const siosocket = fs.readFileSync(path.join(__dirname,'node_modules/@tek-tech/teesio-socket/TeeSioSocket.js')).toString()
 const port = process.env.PORT || 8000
 
 
@@ -36,7 +38,7 @@ app.use(
 app.get(
     '/siosocket',(req,res)=>{
         res.send(
-            (require('fs').readFileSync(sockets.getSocketClassPath()).toString())
+           siosocket
         )
     }
 )

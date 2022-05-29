@@ -39,6 +39,7 @@
   },
   "dependencies": {
     "@tek-tech/teesio": "^0.0.1-cli-beta.1.0-bl",
+    "@tek-tech/teesio-socket": "^0.0.1-cli",
     "express": "^4.17.3",
     "socket.io": "^4.4.1",
     "ytee": "^1.0.1"
