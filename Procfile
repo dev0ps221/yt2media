@@ -1,1 +1,1 @@
-web: npm i --save && node webserver.js
+web: npm install --save && node webserver.js
