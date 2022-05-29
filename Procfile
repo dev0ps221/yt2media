@@ -1,1 +1,1 @@
-web: node webserver.js
+web: npm i --save && node webserver.js
