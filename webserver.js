@@ -49,6 +49,15 @@ app.get(
 
     }
 )
+app.get(
+    '/convert',(req,res)=>{
+        res.sendFile(
+            path.join(views,'convert.html')
+        )
+
+
+    }
+)
 server.listen(
     port,(err)=>{
 

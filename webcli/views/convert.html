@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="/css/master.css">
+    <link rel="stylesheet" href="/css/convert.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
@@ -20,44 +21,44 @@
         </nav>
     </header>
     <section id="container">
-        <h1>DECOUVREZ VOTRE NOUVEAU CONVERTISSEUR DE VIDEOS YOUTUBE PREFERE</h1>
-        <section id="main">
-
+        <h1>CHERCHER ET CONVERTISSEZ VOS VIDEOS PREFERES EN UN CLIC</h1>
+        <section id="main" class="convert">
+            <nav id='views-list'>
+                <ul>
+                    <li>
+                        CHERCHER
+                    </li>
+                    <li  class='actual'>
+                        CONVERTIR
+                    </li>
+                </ul>
+            </nav>
+            <section id='view'>
+                <fieldset>
+                    <div class="field">
+                        <input type="text" id='query'>
+                    </div>
+                    <div class="field">
+                        <button id='doquery'>
+                            GO
+                        </button>
+                    </div>
+                </fieldset>
+                <ul id='content'>
+    
+                </ul>
+            </section>
         </section>
     </section>
     <!-- <section id='main'>
-        <nav id='views-list'>
-            <ul>
-                <li class='actual'>
-                    SEARCH
-                </li>
-                <li>
-                    CONVERT
-                </li>
-            </ul>
-        </nav>
-        <section id='view'>
-            <fieldset>
-                <div class="field">
-                    <input type="text" id='query'>
-                </div>
-                <div class="field">
-                    <button id='doquery'>
-                        GO
-                    </button>
-                </div>
-            </fieldset>
-            <ul id='content'>
-
-            </ul>
-        </section>
+        
     </section> -->
-    <!-- <script src='/ear'>
+    <script src='/ear'>
     </script>
     <script src='/sio'>
     </script>
     <script src="/siosocket"></script>
-    <script src="/js/master.js"></script> -->
+    <script src="/js/master.js"></script>
     <script>
         // socket.post(
         //     'getVid'

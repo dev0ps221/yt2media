@@ -1,0 +1,57 @@
+.convert #views-list{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    margin: 0;
+}
+.convert #views-list ul{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.convert #views-list ul li{
+    list-style-type: none;
+    background: #1115;
+    border-radius: 0.9em;
+    transition: 0.4s;
+    padding: 2%;
+}
+.convert #views-list ul li:hover{
+    list-style-type: none;
+    background: #fff;
+    cursor: pointer;
+    transition: 0.8s;
+    border-radius: 0.9em;
+    padding: 2%;
+}
+.convert #view{
+    display: flex;
+    flex-direction: column;
+}
+.convert #view fieldset{
+    display: flex;
+    flex-direction: row;
+    border: none;
+}
+.convert #view .field *{
+    margin: 0;
+    padding: 2%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.convert #view fieldset .field:first-of-type{
+    display: flex;
+    flex-direction: row;
+    width: 92%;
+}
+.convert #view fieldset .field:last-of-type{
+    display: flex;
+    flex-direction: row;
+    width: 8%;
+}
+.convert #view #content{
+    
+}
