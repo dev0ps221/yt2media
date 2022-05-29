@@ -77,23 +77,27 @@ function renderDownloadLinks(formats){
     let rendered = ``
     formats.forEach(
         (format,idx)=>{
-            if(idx+1==formats.length){
+            // if(idx+1==formats.length){
                 rendered = `${rendered}
                 <li class='download'>
                     <a title='${format.title}' download target='_blank' href='${format.url}'> telecharger au format ${format.ext}  </a>
                 </li>`
-            }
+            // }
         }
     )
     return rendered
 }
 
 function renderVidContent(video){
-
-    video.requested_formats = video.formats.map(f=>{
-        f.title = video.title
-        return f 
-    })
+    if(!video.requested_formats){
+        video.requested_formats = video.formats.map(f=>{
+            f.title = video.title
+            console.log(video)
+            console.log(f.mimeType.split(";")[0])
+            f.url = video.url
+            return f 
+        })
+    }
     return `
         <li class='videoresult'>
             <ul>

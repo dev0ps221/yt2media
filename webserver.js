@@ -84,8 +84,8 @@ server.listen(
                                     ()=>{
                                         const data = download.data
                                         if(data.title){
-                                            const   {title,formats,duration,thumbnails} = data
-                                            ,resp = {title,formats,duration,thumbnails}
+                                            const   {title,requested_formats,formats,duration,thumbnails} = data
+                                            ,resp = {title,requested_formats,formats,duration,thumbnails}
                                             console.log(data,' is the result')
                                             socket.post(
                                                 'getVidRes',({e:null,r:resp})
